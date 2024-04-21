@@ -194,3 +194,41 @@ footer {
 footer p {
     margin: 0;
 }
+
+
+/* For small screens (mobile devices) */
+
+@media only screen and (max-width: 600px) {
+    /* Adjust header styles */
+    header {
+        padding: 10px 0;
+    }
+    header h1 {
+        font-size: 24px;
+    }
+    /* Adjust search input width */
+    #search-form input[type="text"] {
+        width: 80%;
+    }
+}
+
+/* For medium screens (tablets) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Adjust padding for sections */
+    section {
+        padding: 15px;
+    }
+    /* Adjust article list item styles */
+    #articles-list li {
+        margin-bottom: 15px;
+    }
+}
+
+/* For large screens (desktops) */
+@media only screen and (min-width: 1025px) {
+    /* Adjust header padding */
+    header {
+        padding: 20px 0;
+    }
+    /* Adjust font sizes or any other styles */
+}

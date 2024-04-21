@@ -66,6 +66,7 @@ const AIWebsite = () => {
     };
 
     const handleSortChange = (event) => {
+        // console.log('Sort By:', event.target.value);
         setSortBy(event.target.value);
     };
 
