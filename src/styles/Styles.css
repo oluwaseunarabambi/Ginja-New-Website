@@ -1,0 +1,196 @@
+/* styles.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+}
+
+#hero {
+    text-align: center;
+    padding: 50px 0;
+}
+
+#hero h2 {
+    margin: 0;
+}
+
+#hero p {
+    margin: 10px 0;
+}
+
+#search-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#search-form input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#sort-select,
+#filter-select {
+    margin-left: 10px;
+    padding: 5px;
+}
+
+#search-form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search-form button:hover {
+    background-color: #555;
+}
+
+#latest-headlines {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#latest-headlines h2 {
+    margin-top: 0;
+}
+
+#articles-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#articles-list li {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+#articles-list li img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#articles-list li h3 {
+    margin-top: 0;
+}
+
+#articles-list li p {
+    margin-bottom: 0;
+}
+
+#pagination {
+    list-style-type: none;
+    padding: 0;
+}
+
+#pagination li {
+    display: inline;
+    margin-right: 5px;
+}
+
+#pagination li button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#pagination li button:hover {
+    background-color: #0056b3;
+}
+
+.active button {
+    background-color: #0056b3;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #222;
+    color: hsl(166, 83%, 49%);
+}
+
+/* Light Mode Styles */
+.light-mode {
+    background-color: #fff;
+    color: #222;
+}
+
+.ReadArticleButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.ReadArticleButton:hover {
+    background-color: #b38c00;
+}
+
+/* Pagination styles */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+}
