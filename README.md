@@ -36,7 +36,7 @@ react-speech-kit (for text-to-speech functionality)
 Clone the repository to your local machine:
 bash
 Copy code
-git clone https://github.com/your-username/ginjanews-website.git
+git clone https://github.com/oluwaseunarabambi/ginjanews-website.git
 Navigate to the project directory:
 bash
 Copy code
