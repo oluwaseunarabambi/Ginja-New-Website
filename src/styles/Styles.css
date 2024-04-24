@@ -1,25 +1,28 @@
-/* styles.css */
-
+/* Reset and base styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Times', serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #DEF2F1; /* Light background color */
+    color: #17252A; /* Main text color */
 }
 
+/* Header */
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: #2B7A78; /* Dark teal */
+    color: #FEFFFF; /* White text */
     padding: 20px 0;
     text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: 28px; /* Increase font size for header */
 }
 
+/* Navigation */
 nav ul {
-    list-style-type: none;
+    list-style-type: none; /* Remove bullet points */
     padding: 0;
 }
 
@@ -29,10 +32,11 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #FEFFFF; /* White text */
     text-decoration: none;
 }
 
+/* Sections */
 section {
     padding: 20px;
 }
@@ -50,6 +54,7 @@ section {
     margin: 10px 0;
 }
 
+/* Search form */
 #search-form {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -58,37 +63,50 @@ section {
 #search-form input[type="text"] {
     padding: 10px;
     width: 300px;
-    border: 1px solid #ccc;
+    border: 1px solid #17252A; /* Main text color */
     border-radius: 5px;
 }
 
-#sort-select,
-#filter-select {
-    margin-left: 10px;
-    padding: 5px;
-}
-
-#search-form button {
+/* Buttons */
+button {
+    background-color: #13cec5; /* Light cyan button background color */
+    color: #14dfdf; /* White button text color */
     padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-#search-form button:hover {
-    background-color: #555;
+button:hover {
+    opacity: 0.8;
+    background-color: #2B7A78; /* Dark cyan button background color on hover */
+}
+
+/* Dark mode */
+.dark-mode {
+    background-color: #17252A; /* Dark background color */
+    color: #FEFFFF; /* White text */
+}
+
+/* Light mode */
+.light-mode {
+    background-color: #FEFFFF; /* White background color */
+    color: #17252A; /* Dark text */
+}
+
+/* Read article button */
+.ReadArticleButton {
+    background-color: #3AAFA9; /* Teal */
+    color: #FEFFFF; /* White text */
+    margin-top: 1rem;
+}
+
+.ReadArticleButton:hover {
+    background-color: #2B7A78; /* Dark teal on hover */
 }
 
 #latest-headlines {
-    background-color: #fff;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-#latest-headlines h2 {
-    margin-top: 0;
+    padding: 40px;
 }
 
 #articles-list {
@@ -96,139 +114,42 @@ section {
     padding: 0;
 }
 
-#articles-list li {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 20px;
+.social-media-buttons button {
+    margin-right: 10px;
 }
 
-#articles-list li img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-#articles-list li h3 {
-    margin-top: 0;
-}
-
-#articles-list li p {
-    margin-bottom: 0;
-}
-
+/* Pagination */
 #pagination {
-    list-style-type: none;
-    padding: 0;
-}
-
-#pagination li {
-    display: inline;
-    margin-right: 5px;
-}
-
-#pagination li button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-#pagination li button:hover {
-    background-color: #0056b3;
-}
-
-.active button {
-    background-color: #0056b3;
-}
-
-/* Dark Mode Styles */
-.dark-mode {
-    background-color: #222;
-    color: hsl(166, 83%, 49%);
-}
-
-/* Light Mode Styles */
-.light-mode {
-    background-color: #fff;
-    color: #222;
-}
-
-.ReadArticleButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 1rem;
-}
-
-.ReadArticleButton:hover {
-    background-color: #b38c00;
-}
-
-/* Pagination styles */
-.pagination {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    list-style-type: none;
+    padding: 0;
 }
 
-.pagination button {
+#pagination button {
     margin: 0 5px;
     padding: 5px 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    background-color: #3AAFA9; /* Teal */
+    color: #FEFFFF; /* White text */
+    border: none;
     cursor: pointer;
 }
 
+#pagination button:hover {
+    background-color: #2B7A78; /* Dark teal on hover */
+}
+
+/* Footer */
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #2B7A78; /* Dark teal */
+    color: #FEFFFF; /* White text */
     text-align: center;
     padding: 20px 0;
 }
 
+/* Footer text */
 footer p {
     margin: 0;
-}
-
-
-/* For small screens (mobile devices) */
-
-@media only screen and (max-width: 600px) {
-    /* Adjust header styles */
-    header {
-        padding: 10px 0;
-    }
-    header h1 {
-        font-size: 24px;
-    }
-    /* Adjust search input width */
-    #search-form input[type="text"] {
-        width: 80%;
-    }
-}
-
-/* For medium screens (tablets) */
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-    /* Adjust padding for sections */
-    section {
-        padding: 15px;
-    }
-    /* Adjust article list item styles */
-    #articles-list li {
-        margin-bottom: 15px;
-    }
-}
-
-/* For large screens (desktops) */
-@media only screen and (min-width: 1025px) {
-    /* Adjust header padding */
-    header {
-        padding: 20px 0;
-    }
-    /* Adjust font sizes or any other styles */
 }
