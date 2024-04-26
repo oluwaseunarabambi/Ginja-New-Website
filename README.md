@@ -22,6 +22,7 @@ Sort articles by publication date (newest or oldest).
 Toggle between light and dark modes for better readability.
 Click on articles to read their full content.
 Listen to articles using text-to-speech functionality.
+We include Quiz to Application built with React 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Technologies Used**
