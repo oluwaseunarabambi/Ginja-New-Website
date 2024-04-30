@@ -26,6 +26,17 @@ const Quiz = () => {
             options: ["Mount Everest", "Mount Kilimanjaro", "Mount Luke", "Mount Xian"],
             correctAnswer: "Mount Kilimanjaro"
         },
+        {
+            question: "Where is the headquarters of ECOWAS?",
+            options: ["Cairo, Egypt", "Nairobi, Kenya", "Dakar, Senegal", "Abuja, Nigeria"],
+            correctAnswer: "Abuja, Nigeria"
+        },
+        {
+            question: "Who amalgamated the Northern and Southern protectorates of Nigeria?",
+            options: ["Sir Lord Lugard", "Sir Dickson Williams", "Sir Brandon Lark", "Sir Alex Ferguson"],
+            correctAnswer: "Sir Lord Lugard"
+        },
+
     ];
 
     const handleAnswer = (selectedOption) => {
@@ -39,7 +50,7 @@ const Quiz = () => {
         } else {
             setQuizClosed(true);
         }
-        
+
     };
 
 
@@ -53,7 +64,9 @@ const Quiz = () => {
                 </div>
             ) : (
                 <div className="question-container">
-                    <p className="question-number">Question {currentQuestionIndex + 1} of {questions.length}</p>
+                    <p className="question-number">
+                        Question {currentQuestionIndex + 1} of {questions.length}
+                    </p>
                     <h3 className="question">{questions[currentQuestionIndex].question}</h3>
                     <ul className="options-list">
                         {questions[currentQuestionIndex].options.map((option, index) => (
@@ -62,7 +75,9 @@ const Quiz = () => {
                             </li>
                         ))}
                     </ul>
-                    <button onClick={() => setQuizClosed(true)}>Close Quiz</button>
+                    <button onClick={() => setQuizClosed(true)} aria-label="Close Quiz Dialog">
+                        Close Quiz
+                    </button>
                 </div>
             )}
         </div>

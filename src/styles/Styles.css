@@ -153,3 +153,58 @@ footer {
 footer p {
     margin: 0;
 }
+
+
+/* Image Styling */
+#articles-list img {
+    max-width: 100%; /* Ensure images don't exceed their container width */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Add spacing between images and surrounding content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    border-radius: 5px; /* Apply a slight border radius */
+}
+
+/* Image Placeholder */
+.no-image {
+    height: 150px; /* Set a fixed height for the placeholder */
+    background-color: #f0f0f0; /* Light gray background */
+    border-radius: 5px; /* Apply border radius */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #999;
+}
+
+/* New Styles */
+/* Headline Styles */
+#latest-headlines h2 {
+    font-size: 24px; /* Decrease font size for headlines */
+    margin-bottom: 20px; /* Add spacing below headlines */
+    color: #333; /* Darken headline color for better contrast */
+}
+
+/* Article Description */
+#articles-list p {
+    color: #666; /* Darken description text color */
+}
+
+/* Hover Effects */
+#articles-list li:hover {
+    transform: translateY(-2px); /* Add a slight lift effect on hover */
+}
+
+/* Pagination Active State */
+#pagination button.active {
+    background-color: #14dfdf; /* Highlight active page button */
+}
+
+/* Footer Link Styling */
+footer a {
+    color: #FEFFFF; /* White text for footer links */
+    text-decoration: underline; /* Underline footer links */
+}
+
+footer a:hover {
+    color: #14dfdf; /* Change link color on hover */
+}

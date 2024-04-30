@@ -3,6 +3,7 @@ import './styles/Styles.css';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import About from "./About";
 import Contact from "./Contact";
+import Quiz from "../Quiz";
 
 const AIWebsite = () => {
     const [articles, setArticles] = useState([]);
@@ -18,16 +19,17 @@ const AIWebsite = () => {
 
     useEffect(() => {
         fetchArticles();
-    }, []);  // Empty dependency array ensures useEffect runs only after initial render
+    }, []);
 
     const fetchArticles = () => {
-        fetch('https://newsdata.io/api/1/news?apikey=pub_425732c27ef1eeef1d66e821b6dbed936f031&q=Nigeria&country=ng  ')
+        fetch('https://newsdata.io/api/1/news?apikey=pub_425732c27ef1eeef1d66e821b6dbed936f031&q=Nigeria&country=ng')
             .then(response => response.json())
             .then(data => {
-                console.log(data); 
+                console.log(data);
                 if (data && data.results) {
                     const modifiedArticles = modifyArticles(data.results);
                     setArticles(modifiedArticles);
+                    filterAndSortArticles(modifiedArticles);
                 } else {
                     throw new Error("Invalid API response");
                 }
@@ -37,7 +39,6 @@ const AIWebsite = () => {
             });
     };
 
-    // Inside the modifyArticles function
     const modifyArticles = (results) => {
         return results.map(article => ({
             article_id: article.article_id,
@@ -59,7 +60,7 @@ const AIWebsite = () => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent the form submitting normally
+        event.preventDefault();
         filterArticles();
     };
 
@@ -69,63 +70,60 @@ const AIWebsite = () => {
 
     const handleSortChange = (event) => {
         setSortBy(event.target.value);
+        filterAndSortArticles(articles);
     };
 
     const handleFilterChange = (event) => {
         setFilterBy(event.target.value);
+        filterAndSortArticles(articles);
     };
 
-    const filterArticles = () => {   // Filter articles based on search term
-        const filtered = articles.filter(article =>
+    const filterAndSortArticles = (articles) => {
+        let filtered = [...articles].filter(article =>
             article.title.toLowerCase().includes(searchTerm)
         );
-        setFilteredArticles(filtered);
-        setCurrentPage(1);  // Reset to the first page when performing a new search
-    };
 
-    const sortArticles = (articles) => {   // Apply sorting and filtering to articles
-        let sortedArticles = [...articles];
-        if (sortBy === 'newest') {
-            sortedArticles.sort((a, b) => new Date(b.published_date) - new Date(a.published_date));
-        } else if (sortBy === 'oldest') {
-            sortedArticles.sort((a, b) => new Date(a.published_date) - new Date(b.published_date));
+        if (filterBy) {
+            filtered = filtered.filter(article => article.section.toLowerCase() === filterBy.toLowerCase());
         }
-        return sortedArticles;
+
+        let sortedArticles = [...filtered];
+        if (sortBy === 'newest') {
+            sortedArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+        } else if (sortBy === 'oldest') {
+            sortedArticles.sort((a, b) => new Date(a.pubDate) - new Date(b.pubDate));
+        }
+        setFilteredArticles(sortedArticles);
+        setCurrentPage(1);
     };
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    //Calculate the index of the first and last item to display on the current page
+    const shareOnTwitter = (url) => {
+        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`);
+        alert("Shared on Twitter!");
+    };
+
+    const shareOnFacebook = (url) => {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+        alert("Shared on Facebook!");
+    };
+
+    const shareOnLinkedIn = (url) => {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
+        alert("Shared on LinkedIn!");
+    };
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = (searchTerm ? filteredArticles : articles).slice(indexOfFirstItem, indexOfLastItem);
-
-    const sortedAndFilteredArticles = sortArticles(searchTerm ? filteredArticles : articles).filter(article => {
-        return !filterBy || article.section.toLowerCase() === filterBy.toLowerCase();
-    });
+    const currentItems = filteredArticles.slice(indexOfFirstItem, indexOfLastItem);
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(sortedAndFilteredArticles.length / itemsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(filteredArticles.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
-
-    // Function to handle sharing article on Twitter
-    const shareOnTwitter = (url) => {
-        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponet(url)}`);
-    };
-
-    // Function to handle sharing article on Facebook
-    const shareOnFacebook = (url) => {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
-    };
-
-    // Function to handle sharing article on LinkedIn
-    const shareOnLinkedIn = (url) => {
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
-    };
 
     return (
         <div className={darkMode ? "dark-mode" : "light-mode"}>
@@ -152,7 +150,7 @@ const AIWebsite = () => {
 
             <section id="hero">
                 <h2>Welcome to our Ginja News Website</h2>
-                <p>Stay updated with the latest headlines from every Country </p>
+                <p>Stay updated with the Headlines news from Nigeria</p>
                 <form id="search-form" onSubmit={handleSubmit}>
                     <input type="text" id="search-input" name="search" value={searchTerm} onChange={handleChange} placeholder="Search News" />
                     <button type="submit">Search</button>
@@ -189,8 +187,8 @@ const AIWebsite = () => {
                                 <button onClick={() => shareOnFacebook(article.url)}>Share on Facebook</button>
                                 <button onClick={() => shareOnLinkedIn(article.url)}>Share on LinkedIn</button>
                             </div>
-                            {article.urlToImage ? (
-                                <img src={article.urlToImage} alt="Article Thumbnail" />
+                            {article.image_url ? (
+                                <img src={article.image_url} alt="Article Thumbnail" />
                             ) : (
                                 <div className="no-image">Image Not Available</div>
                             )}
@@ -215,7 +213,7 @@ const AIWebsite = () => {
                     ))}
                 </ul>
             </section>
-
+            <Quiz />
             <About />
             <Contact />
             <footer>
