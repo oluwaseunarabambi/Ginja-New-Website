@@ -15,7 +15,7 @@ License
 The Ginja News Website is a React-based application that fetches news articles from the NewsData.io API and displays them in a user-friendly interface. Users can search for specific articles, filter them by section, and sort them based on publication date. The website also supports dark mode for enhanced readability.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Features**
-Fetch and display news articles from the New York Times API.
+Fetch and display news articles from the NewsData.io API.
 Search for articles by keywords.
 1. Filter articles by section (e.g., world, politics, sports).
 2. Sort articles by publication date (newest or oldest).
