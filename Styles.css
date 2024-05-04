@@ -201,7 +201,29 @@ footer p {
     font-size: 14px;
     color: #999;
 }
+/* Play button */
+.play-button {
+    background-color: #3AAFA9; /* Teal */
+    color: #FEFFFF; /* White text */
+    margin-top: 1rem;
+    margin-right: 0.5rem; /* Adjust margin for spacing between buttons */
+}
 
+.play-button:hover {
+    background-color: #2B7A78; /* Dark teal on hover */
+}
+
+/* Pause button */
+.pause-button {
+    background-color: #FF6B6B; /* Red */
+    color: #FEFFFF; /* White text */
+    margin-top: 1rem;
+    margin-left: 0.5rem; /* Adjust margin for spacing between buttons */
+}
+
+.pause-button:hover {
+    background-color: #D13F3F; /* Dark red on hover */
+}
 /* New Styles */
 /* Headline Styles */
 #latest-headlines h2 {
