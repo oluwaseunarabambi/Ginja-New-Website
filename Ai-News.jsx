@@ -22,6 +22,8 @@ const AIWebsite = () => {
     const [error, setError] = useState(null);
     const [currentDateTime, setCurrentDateTime] = useState (new Date());
     const articlesListRef = useRef(null);
+    const [articleText, setArticleText] = useState('');
+    const [isSpeaking, setIsSpeaking] = useState(false);
 
     useEffect(() => {
         fetchArticles();
@@ -70,7 +72,22 @@ const AIWebsite = () => {
 
     const speakText = (title, description) => {
         speak({ text: `${title}. ${description}` });
+        setArticleText(text); // Save the article text
+        speak({ text}); // Speak the article
+        setIsSpeaking(true); // Set speaking state to true
     };
+
+    const toggleSpeak = () => {
+        if (isSpeaking) {
+            // Pause speech synthesis if currently speaking
+            window.speechSynthesis.cancel();
+            setIsSpeaking(false); // update speaking state to false
+        } else {
+            // Resume speech synthesis
+            speak({ text: articleText});
+            setIsSpeaking(true); // Update speaking state to true
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -241,8 +258,11 @@ const AIWebsite = () => {
                                 <div className="no-image">Image Not Available</div>
                             )}
                             <p>{article.description}</p>
-                            <button className="ReadArticleButton" onClick={() => speak({ text: article.title + '. ' + article.description })}>
-                                Read Article
+                            <button className="ReadArticleButton play-button" onClick={() => speakText(article.title, article.description)}>
+                               {isSpeaking ? "Play Article" : "Pause Article"} 
+                            </button>
+                            <button className="ReadArticleButton pause-button" onClick={toggleSpeak}>
+                               {isSpeaking ? "Pause" : "Play"} 
                             </button>
                         </li>
                     ))}
