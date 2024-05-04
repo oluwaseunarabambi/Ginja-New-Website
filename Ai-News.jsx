@@ -24,6 +24,8 @@ const AIWebsite = () => {
     const articlesListRef = useRef(null);
     const [articleText, setArticleText] = useState('');
     const [isSpeaking, setIsSpeaking] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
 
     useEffect(() => {
         fetchArticles();
@@ -185,6 +187,16 @@ const AIWebsite = () => {
         return <Link to={route} />
     }
 
+    // Function to handle submission of a new comment
+    const handleSubmitComment = (event) => {
+        event.preventDefault();
+        if (newComment.trim() !== "") {
+            setComments( [...comments, newComment]);
+            setNewComment(""); // Clear input field after submission
+        } 
+    };
+
+
     return (
         <div className={darkMode ? "dark-mode" : "light-mode"}>
             <header>
@@ -285,6 +297,24 @@ const AIWebsite = () => {
             <Quiz />
             <About />
             <Contact />
+            {/* Comments Section */}
+            <section id="comments-section">
+                <h2>Comments</h2>
+                <form onSubmit={handleSubmitComment}>
+                    <textarea 
+                        value={newComment}
+                        onChange={(event) => setNewComment(event.target.value)}
+                        placeholder="Write your comment..."
+                        required 
+                    />
+                    <button type="submit">Submit</button>
+                </form>
+                <ul>
+                    {comments.map((comment, index) => (
+                        <li key={index}>{comment}</li>
+                    ))}
+                </ul>
+            </section>
             <footer>
                 <p>&copy; {new Date().getFullYear()} Ginja Tech AI News Website</p>
             </footer>
