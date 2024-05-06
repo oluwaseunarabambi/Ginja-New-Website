@@ -52,7 +52,14 @@ const AIWebsite = () => {
                 }
             })
             .catch(error => {
-                setError(error.message);
+                let errorMessage = "An error occured while fetching article.";
+                if (error instanceof TypeError && error.message === "Failed to fetch") {
+                    errorMessage = "Network error: Unable to connect to the server. Please check your internet connection.";
+                } else if (error.message)
+                setError(error.message.startsWith("Invalid API response")); {
+                    errorMessage = "Invalid API response: The server returned unexpected data.";
+                } 
+                setError(errorMessage);
             });
     };
 
@@ -74,12 +81,12 @@ const AIWebsite = () => {
 
     const speakText = (title, description) => {
         speak({ text: `${title}. ${description}` });
-        setArticleText(text); // Save the article text
-        speak({ text}); // Speak the article
+        setArticleText(description); // Save the article text
+        speak({description}); // Speak the article
         setIsSpeaking(true); // Set speaking state to true
     };
 
-    const toggleSpeak = () => {
+    const togglePlayPause = () => {
         if (isSpeaking) {
             // Pause speech synthesis if currently speaking
             window.speechSynthesis.cancel();
@@ -93,7 +100,7 @@ const AIWebsite = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        filterArticles();
+        filterAndSortArticles();
     };
 
     const handleChange = (event) => {
@@ -208,11 +215,11 @@ const AIWebsite = () => {
                 
                 <nav>
                     <ul>
-                        <li><a href="#" className="nav-link">Home</a></li>
-                        <li><a href="#" className="nav-link">News</a></li>
-                        <li><a href="#" className="nav-link">Sports</a></li>
-                        <li><a href="#" className="nav-link">Business</a></li>
-                        <li><a href="#" className="nav-link">World</a></li>
+                        <li><Link to="/" className="nav-link">Home</Link></li>
+                        <li><Link to="news" className="nav-link">News</Link></li>
+                        <li><Link to="business" className="nav-link">Business</Link></li>
+                        <li><Link to="sports" className="nav-link">Sports</Link></li>
+                        <li><Link to="worldNews" className="nav-link">World News</Link></li>
                     </ul>
                 </nav>
                 <button className="mode-button" onClick={toggleDarkMode}>
@@ -271,9 +278,9 @@ const AIWebsite = () => {
                             )}
                             <p>{article.description}</p>
                             <button className="ReadArticleButton play-button" onClick={() => speakText(article.title, article.description)}>
-                               {isSpeaking ? "Play Article" : "Pause Article"} 
+                               {isSpeaking ? "Pause Article" : "Play Article"} 
                             </button>
-                            <button className="ReadArticleButton pause-button" onClick={toggleSpeak}>
+                            <button className="ReadArticleButton pause-button" onClick={togglePlayPause}>
                                {isSpeaking ? "Pause" : "Play"} 
                             </button>
                         </li>
