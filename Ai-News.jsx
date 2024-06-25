@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import './styles/Styles.css';
-import { useSpeechSynthesis } from 'react-speech-kit';
+import './src/styles/Styles.css';
 import About from "./About";
 import Contact from "./Contact";
-import Quiz from "../Quiz";
+import Quiz from "./Quiz";
 import FloatingActionButton from "./FloatingActionButton";
 import { Link } from "react-router-dom";
 
@@ -18,7 +17,6 @@ const AIWebsite = () => {
     const [filterBy, setFilterBy] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(16);
-    const { speak } = useSpeechSynthesis();
     const [error, setError] = useState(null);
     const [currentDateTime, setCurrentDateTime] = useState (new Date());
     const articlesListRef = useRef(null);
@@ -26,6 +24,9 @@ const AIWebsite = () => {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
+
+    const synthRef = useRef(window.speechSynthesis);
+    const utteranceRef = useRef(null);
 
     useEffect(() => {
         fetchArticles();
@@ -80,23 +81,31 @@ const AIWebsite = () => {
     };
 
     const speakText = (title, description) => {
-        speak({ text: `${title}. ${description}` });
-        setArticleText(description); // Save the article text
-        speak({description}); // Speak the article
-        setIsSpeaking(true); // Set speaking state to true
+        if (synthRef.current.speaking) {
+            synthRef.current.cancel();
+        }
+
+        const text = `${title}. ${description}`;
+        utteranceRef.current = new SpeechSynthesisUtterance(text);
+
+        utteranceRef.current.onend = ()=> {
+            setIsSpeaking(false);
+        };
+
+        synthRef.current.speak(utteranceRef.current);
+        setArticleText(text);
+        setIsSpeaking(true);
+
     };
 
     const togglePlayPause = () => {
         if (isSpeaking) {
-            // Pause speech synthesis if currently speaking
-            window.speechSynthesis.cancel();
-            setIsSpeaking(false); // update speaking state to false
-        } else {
-            // Resume speech synthesis
-            speak({ text: articleText});
-            setIsSpeaking(true); // Update speaking state to true
+            synthRef.current.cancel();
+            setIsSpeaking(false);
+        } else if (articleText) {
+            speakText("", articleText); // Resume speaking the current article text 
         }
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
